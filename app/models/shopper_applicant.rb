@@ -15,10 +15,10 @@ class ShopperApplicant < ApplicationRecord
     )
   }
 
-  def self.funnel_analytics(start_date, end_date)
+  def self.weekly_application_status
     joins(:funnels).
-    applied_between(start_date, end_date).
     group("week_start").
+    order("week_start").
     select(
       "date_trunc('week', shopper_applicants.created_at) AS week_start, " +
       "COUNT(*) AS applied, " +
