@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root "applicants#new"
+
   resources :funnels, only: [:index]
 
-  resource :applicants, only: [:new, :create] do
+  resource :applicants, only: [:create] do
     get :complete
   end
 end
