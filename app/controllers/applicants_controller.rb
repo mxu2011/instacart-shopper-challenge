@@ -1,4 +1,6 @@
 class ApplicantsController < ApplicationController
+  before_action :authenticate_applicant!, only: [:edit, :update, :complete]
+
   def new
     @applicant = ShopperApplicant.new
   end
@@ -7,9 +9,24 @@ class ApplicantsController < ApplicationController
     @applicant = ShopperApplicant.new(applicant_params)
 
     if @applicant.save
+      sign_in(@applicant)
       redirect_to complete_applicants_path
     else
       render :new
+    end
+  end
+
+  def edit
+    @applicant = current_applicant
+  end
+
+  def update
+    @applicant = current_applicant
+
+    if @applicant.update(applicant_params)
+      redirect_to root_path
+    else
+      render :edit
     end
   end
 
