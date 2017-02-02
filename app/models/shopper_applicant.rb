@@ -1,12 +1,20 @@
 class ShopperApplicant < ApplicationRecord
+  attr_accessor :background_check_accepted
+
   has_many :application_steps
   has_many :funnels, through: :application_steps
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :email, presence: true, uniqueness: true
-  validates :phone_number, presence: true
-  validates :zip_code, presence: true
+  validates :first_name, presence: true, length: { maximum: 127 }
+  validates :last_name, presence: true, length: { maximum: 127 }
+  validates :email, presence: true, uniqueness: true, length: { maximum: 127 }
+  validates :phone_number, presence: true, length: { maximum: 24 }
+  validates :zip_code, presence: true, length: { maximum: 18 }
+
+  before_save -> {
+    if !background_check_accepted_at && background_check_accepted
+      self.background_check_accepted_at = Time.now
+    end
+  }
 
   scope :applied_between, -> (start_date, end_date) {
     where(
