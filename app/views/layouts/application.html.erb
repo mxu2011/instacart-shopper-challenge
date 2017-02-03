@@ -9,10 +9,13 @@
   </head>
 
   <body>
-    <main class="container">
-      <%= render "shared/flashes" %>
+    <%= render "shared/navbar" %>
 
-      <%= yield %>
-    </main>
+    <div class="vertical-center">
+      <main class="container">
+        <%= render "shared/flashes" %>
+        <%= yield %>
+      </main>
+    </div>
   </body>
 </html>
