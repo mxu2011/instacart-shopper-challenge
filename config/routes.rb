@@ -5,5 +5,6 @@ Rails.application.routes.draw do
 
   resource :applicants, only: [:create, :edit, :update] do
     get :complete
+    post :accept
   end
 end

@@ -41,6 +41,19 @@ RSpec.describe ApplicantsController, type: :controller do
     end
   end
 
+  describe "POST accept" do
+    it "accepts the background check for a signed in applicant" do
+      sign_in(applicant)
+      post :accept
+      expect(applicant.reload.background_check_accepted_at).to be_present
+    end
+
+    it "redirects to the root path for a visitor" do
+      post :accept
+      expect(response).to redirect_to root_path
+    end
+  end
+
   describe "GET edit" do
     it "renders successfully for a signed in applicant" do
       sign_in(applicant)

@@ -1,5 +1,5 @@
 class ApplicantsController < ApplicationController
-  before_action :authenticate_applicant!, only: [:edit, :update, :complete]
+  before_action :authenticate_applicant!, only: [:edit, :update, :complete, :accept]
 
   def new
     @applicant = ShopperApplicant.new
@@ -31,6 +31,14 @@ class ApplicantsController < ApplicationController
   end
 
   def complete
+  end
+
+  def accept
+    @applicant = current_applicant
+    @applicant.background_check_accepted = true
+    @applicant.save
+
+    redirect_to root_path
   end
 
 
