@@ -9,6 +9,7 @@ RSpec.describe Funnel, type: :model do
 
   describe "associations" do
     it { is_expected.to have_many :application_steps }
+    it { is_expected.to have_many :shopper_applicants }
   end
 
   describe "model validations" do

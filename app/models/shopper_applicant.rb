@@ -1,7 +1,7 @@
 class ShopperApplicant < ApplicationRecord
   attr_accessor :background_check_accepted
 
-  has_many :application_steps
+  has_many :application_steps, dependent: :destroy
   has_many :funnels, through: :application_steps
 
   validates :first_name, presence: true, length: { maximum: 127 }
