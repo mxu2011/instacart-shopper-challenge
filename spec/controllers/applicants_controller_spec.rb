@@ -3,6 +3,19 @@ require 'rails_helper'
 RSpec.describe ApplicantsController, type: :controller do
   let(:applicant) { create(:shopper_applicant) }
 
+  describe "GET show" do
+    it "renders successfully for a signed in applicant" do
+      sign_in(applicant)
+      get :show
+      expect(subject).to respond_with 200
+    end
+
+    it "redirects to the root path for a visitor" do
+      get :show
+      expect(response).to redirect_to root_path
+    end
+  end
+
   describe "GET new" do
     it "renders successfully" do
       get :new

@@ -1,5 +1,9 @@
 class ApplicantsController < ApplicationController
-  before_action :authenticate_applicant!, only: [:edit, :update, :complete, :accept]
+  before_action :authenticate_applicant!, only: [:show, :edit, :update, :complete, :accept]
+  before_action :set_applicant, only: [:show, :edit, :update, :complete, :accept]
+
+  def show
+  end
 
   def new
     @applicant = ShopperApplicant.new
@@ -17,14 +21,11 @@ class ApplicantsController < ApplicationController
   end
 
   def edit
-    @applicant = current_applicant
   end
 
   def update
-    @applicant = current_applicant
-
     if @applicant.update(applicant_params)
-      redirect_to root_path
+      redirect_to applicants_path
     else
       render :edit
     end
@@ -34,15 +35,18 @@ class ApplicantsController < ApplicationController
   end
 
   def accept
-    @applicant = current_applicant
     @applicant.background_check_accepted = true
     @applicant.save
 
-    redirect_to root_path
+    redirect_to applicants_path
   end
 
 
   private
+
+  def set_applicant
+    @applicant = current_applicant
+  end
 
   def applicant_params
     params.require(:shopper_applicant).permit(
