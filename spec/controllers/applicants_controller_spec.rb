@@ -28,7 +28,7 @@ RSpec.describe ApplicantsController, type: :controller do
     end
   end
 
-  describe "GET confirmation" do
+  describe "GET complete" do
     it "renders successfully for a signed in applicant" do
       sign_in(applicant)
       get :complete
