@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "applicants#new"
+  root "static_pages#index"
 
   resources :funnels, only: [:index]
 
