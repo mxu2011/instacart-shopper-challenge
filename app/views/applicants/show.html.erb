@@ -1,0 +1,29 @@
+<h2 class="text-center col-xs-12">
+  Your Application
+</h2>
+
+<p>
+  <b>Name</b>
+  <br>
+  <%= @applicant.name %>
+</p>
+
+<p>
+  <b>Email</b>
+  <br>
+  <%= @applicant.email %>
+</p>
+
+<p>
+  <b>Phone Number</b>
+  <br>
+  <%= @applicant.phone_number %>
+</p>
+
+<p>
+  <b>Zip Code</b>
+  <br>
+  <%= @applicant.zip_code %>
+</p>
+
+<%= link_to "Edit", edit_applicants_path, class: "btn btn-sm btn-info" %>
