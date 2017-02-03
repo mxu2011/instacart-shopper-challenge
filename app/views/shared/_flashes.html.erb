@@ -1,0 +1,11 @@
+  <% if flash.present? %>
+    <div class="row">
+      <% flash.each do |category, message| %>
+        <div class="col-sm-8 col-sm-offset-2">
+          <div class="alert alert-<%= category %> text-center" role="alert">
+            <%= message %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>

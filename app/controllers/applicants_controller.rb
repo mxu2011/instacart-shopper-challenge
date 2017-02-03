@@ -14,8 +14,10 @@ class ApplicantsController < ApplicationController
 
     if @applicant.save
       sign_in(@applicant)
+      flash[:success] = "Application submitted!"
       redirect_to complete_applicants_path
     else
+      flash.now[:warning] = "Application could not be submitted!"
       render :new
     end
   end
@@ -25,8 +27,10 @@ class ApplicantsController < ApplicationController
 
   def update
     if @applicant.update(applicant_params)
+      flash[:success] = "Application updated!"
       redirect_to applicants_path
     else
+      flash.now[:warning] = "Application could not be updated!"
       render :edit
     end
   end

@@ -39,6 +39,16 @@ RSpec.describe ApplicantsController, type: :controller do
         }
       }.to change(ShopperApplicant, :count).by 1
     end
+
+    it "provides a success flash message on success" do
+      post :create, params: { shopper_applicant: attributes_for(:shopper_applicant) }
+      expect(subject).to set_flash[:success]
+    end
+
+    it "provides a warn flash message on failure" do
+      post :create, params: { shopper_applicant: attributes_for(:shopper_applicant, email: "") }
+      expect(subject).to set_flash.now[:warning]
+    end
   end
 
   describe "GET complete" do
@@ -96,6 +106,18 @@ RSpec.describe ApplicantsController, type: :controller do
     it "redirects to the root path for a visitor" do
       patch :update, params: { shopper_applicant: attributes_for(:shopper_applicant) }
       expect(response).to redirect_to root_path
+    end
+
+    it "provides a success flash message on success" do
+      sign_in(applicant)
+      patch :update, params: { shopper_applicant: { first_name: "Zebulon" }}
+      expect(subject).to set_flash[:success]
+    end
+
+    it "provides a warn flash message on failure" do
+      sign_in(applicant)
+      patch :update, params: { shopper_applicant: { first_name: "" }}
+      expect(subject).to set_flash.now[:warning]
     end
   end
 end
