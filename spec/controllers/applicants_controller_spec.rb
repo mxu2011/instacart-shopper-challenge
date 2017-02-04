@@ -51,15 +51,15 @@ RSpec.describe ApplicantsController, type: :controller do
     end
   end
 
-  describe "GET complete" do
+  describe "GET confirm" do
     it "renders successfully for a signed in applicant" do
       sign_in(applicant)
-      get :complete
+      get :confirm
       expect(subject).to respond_with 200
     end
 
     it "redirects to the root path for a visitor" do
-      get :complete
+      get :confirm
       expect(subject).to redirect_to root_path
     end
   end

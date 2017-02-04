@@ -1,6 +1,6 @@
 class ApplicantsController < ApplicationController
-  before_action :authenticate_applicant!, only: [:show, :edit, :update, :complete, :accept]
-  before_action :set_applicant, only: [:show, :edit, :update, :complete, :accept]
+  before_action :authenticate_applicant!, only: [:show, :edit, :update, :confirm, :accept]
+  before_action :set_applicant, only: [:show, :edit, :update, :confirm, :accept]
 
   def show
   end
@@ -15,7 +15,7 @@ class ApplicantsController < ApplicationController
     if @applicant.save
       sign_in(@applicant)
       flash[:success] = "Application submitted!"
-      redirect_to complete_applicants_path
+      redirect_to confirm_applicants_path
     else
       flash.now[:warning] = "Application could not be submitted!"
       render :new
@@ -35,7 +35,7 @@ class ApplicantsController < ApplicationController
     end
   end
 
-  def complete
+  def confirm
   end
 
   def accept

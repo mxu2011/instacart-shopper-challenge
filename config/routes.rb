@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :funnels, only: [:index]
 
   resource :applicants, only: [:new, :create, :edit, :update, :show] do
-    get :complete
+    get :confirm
     post :accept
   end
 end
